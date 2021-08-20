@@ -11,6 +11,12 @@ import (
 	"github.com/gempir/go-twitch-irc/v2"
 )
 
+const (
+	cycleInterval         = 5 * time.Second  // How often should the list be worked through
+	bansPerCycle          = 10               // How many bans are allowed each cycle to stay within twitch limits
+	delayBeforeDisconnect = 10 * time.Second // Delay to allow for messages to arrive before disconnecting
+)
+
 var username string
 var token string
 var channel string
@@ -51,7 +57,7 @@ func main() {
 
 	fmt.Printf("Size of list: %v", len(bots))
 
-	banTicker := time.NewTicker(5 * time.Second)
+	banTicker := time.NewTicker(cycleInterval)
 
 	client := twitch.NewClient(username, token)
 
@@ -81,15 +87,14 @@ func OnConnect(bots []string, banTicker *time.Ticker, client *twitch.Client) fun
 			totalEntries := len(bots) - 1
 			entryCounter := 0
 			banCounter := 0
-			limit := 10
 
 			for {
 				<-banTicker.C
-				for banCounter < limit {
+				for banCounter < bansPerCycle {
 					fmt.Printf("Processing entry %v/%v\n", entryCounter+1, totalEntries+1)
 
 					if entryCounter == totalEntries {
-						time.Sleep(10 * time.Second)
+						time.Sleep(delayBeforeDisconnect)
 
 						fmt.Println("Disconnecting from channel")
 						banTicker.Stop()
