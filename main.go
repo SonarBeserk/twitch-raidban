@@ -65,8 +65,10 @@ func main() {
 
 	client.OnNoticeMessage(func(message twitch.NoticeMessage) {
 		if message.MsgID == "already_banned" {
-			fmt.Println(message.Message)
+			fmt.Println("Notice: " + message.Message)
 		}
+
+		fmt.Println("Notice: " + message.Message)
 	})
 
 	client.Join(channel)
