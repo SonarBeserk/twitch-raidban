@@ -3,8 +3,12 @@ Program to assist with quickly banning lists of bots on Twitch
 
 ## Building
 
+To build manually you will first need to install [Golang](https://golang.org/).
+
 `go install`
 This command will build the program and output the binary as `twitch-raidban` to your `$GOBIN` directory. By default this will be `~/go/bin`.
+
+[Prebuilt binaries](https://github.com/SonarBeserk/twitch-raidban/releases) are also offered through the releases on this repository for the main operating systems.
 
 ## Usage
 
