@@ -55,7 +55,7 @@ func main() {
 		log.Fatalf("Error parsing bots file: %v", err)
 	}
 
-	fmt.Printf("Size of list: %v", len(bots))
+	fmt.Printf("Size of list: %v\n", len(bots))
 
 	banTicker := time.NewTicker(cycleInterval)
 
