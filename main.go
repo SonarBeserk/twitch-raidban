@@ -31,19 +31,23 @@ func parseFlags() {
 	flag.Parse()
 
 	if username == "" {
-		log.Fatal("Twitch username must be provided")
+		log.Println("Twitch username must be provided")
+		return
 	}
 
 	if token == "" {
-		log.Fatal("Twitch token must be provided")
+		log.Println("Twitch token must be provided")
+		return
 	}
 
 	if channel == "" {
-		log.Fatal("Channel must be provided")
+		log.Println("Channel must be provided")
+		return
 	}
 
 	if file == "" {
-		log.Fatal("Bots txt file must be provided")
+		log.Println("Bots txt file must be provided")
+		return
 	}
 }
 
